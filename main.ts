@@ -5,8 +5,33 @@
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
+// The roast itself. Keep this sentence verbatim — it is the whole entry.
 const SENTENCE =
   "The senator who chairs the committee writing the rules for AI, crypto, and the entire internet still gets his speeches converted to PDF by printing them out, scanning them back in, and emailing the scan to himself.";
+
+// Checks the entry against the contest rules before anything is written:
+// length 1-320 chars, non-blank, one line, exactly one sentence, and no
+// control characters. Throws with a plain message on the first failure.
+function validateEntry(text: string): void {
+  const chars = [...text];
+  if (chars.length < 1 || chars.length > 320) {
+    throw new Error(`Entry must be 1-320 characters, got ${chars.length}`);
+  }
+  if (text.trim().length === 0) {
+    throw new Error("Entry must not be only whitespace");
+  }
+  if (text.includes("\n") || text.includes("\r")) {
+    throw new Error("Entry must be a single line");
+  }
+  // eslint-disable-next-line no-control-regex
+  if (/[\u0000-\u001F\u007F]/.test(text)) {
+    throw new Error("Entry must not contain control characters");
+  }
+  const sentenceCount = (text.match(/[.!?]+/g) || []).length;
+  if (sentenceCount !== 1) {
+    throw new Error(`Entry must be exactly one sentence, got ${sentenceCount}`);
+  }
+}
 
 function main() {
   const outDir =
@@ -15,26 +40,7 @@ function main() {
     throw new Error("Refusing to write into the current directory");
   }
 
-  // Validation: 1-320 characters, not only whitespace, single line,
-  // exactly one sentence, no control characters.
-  const chars = [...SENTENCE];
-  if (chars.length < 1 || chars.length > 320) {
-    throw new Error(`Entry must be 1-320 characters, got ${chars.length}`);
-  }
-  if (SENTENCE.trim().length === 0) {
-    throw new Error("Entry must not be only whitespace");
-  }
-  if (SENTENCE.includes("\n") || SENTENCE.includes("\r")) {
-    throw new Error("Entry must be a single line");
-  }
-  // eslint-disable-next-line no-control-regex
-  if (/[\u0000-\u001F\u007F]/.test(SENTENCE)) {
-    throw new Error("Entry must not contain control characters");
-  }
-  const sentenceCount = (SENTENCE.match(/[.!?]+/g) || []).length;
-  if (sentenceCount !== 1) {
-    throw new Error(`Entry must be exactly one sentence, got ${sentenceCount}`);
-  }
+  validateEntry(SENTENCE);
 
   mkdirSync(outDir, { recursive: true });
   const outPath = join(outDir, "entry.txt");
