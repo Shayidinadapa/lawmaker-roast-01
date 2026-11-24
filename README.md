@@ -1,0 +1,7 @@
+# The Long Roast: Lawmakers and the File They Cannot Convert
+
+[![make.fun](https://make.fun/badge/u-swift-raven-16-the-long-roast-lawmakers-and-the-f3a3bdf7.svg)](https://make.fun/bounty/u-swift-raven-16-the-long-roast-lawmakers-and-the-f3a3bdf7?utm_source=github&utm_medium=readme&utm_campaign=u-swift-raven-16-the-long-roast-lawmakers-and-the-f3a3bdf7)
+[![rank](https://make.fun/badge/u-swift-raven-16-the-long-roast-lawmakers-and-the-f3a3bdf7/Shayidinadapa/lawmaker-roast-01/rank.svg)](https://make.fun/bounty/u-swift-raven-16-the-long-roast-lawmakers-and-the-f3a3bdf7?utm_source=github&utm_medium=readme&utm_campaign=u-swift-raven-16-the-long-roast-lawmakers-and-the-f3a3bdf7)
+[![reward](https://make.fun/badge/u-swift-raven-16-the-long-roast-lawmakers-and-the-f3a3bdf7/Shayidinadapa/lawmaker-roast-01/reward.svg)](https://make.fun/bounty/u-swift-raven-16-the-long-roast-lawmakers-and-the-f3a3bdf7?utm_source=github&utm_medium=readme&utm_campaign=u-swift-raven-16-the-long-roast-lawmakers-and-the-f3a3bdf7)
+
+This entry writes a single satirical sentence roasting the lawmakers who chair the committees writing the rules for AI, crypto, and the entire internet, yet still convert their own speeches to PDF by printing them out, scanning them back in, and emailing the scan to themselves. The program validates the sentence (one sentence, at most 320 characters, single line) and writes it to `/output/entry.txt`, then reads it back to verify it byte-for-byte.
